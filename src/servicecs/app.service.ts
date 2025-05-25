@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   BadRequestException,
   Injectable,
@@ -29,13 +30,16 @@ interface PaginatedResponse<T> {
 
 @Injectable()
 export class AppService {
-  constructor(private readonly supabaseService: SupabaseService) { }
+  constructor(private readonly supabaseService: SupabaseService) {}
 
   // Product Types Methods
   async getProductTypes(query?: PaginationQuery): Promise<any> {
     try {
       // Check if pagination is needed
-      const needsPagination = query && typeof query.page === 'number' && typeof query.limit === 'number';
+      const needsPagination =
+        query &&
+        typeof query.page === 'number' &&
+        typeof query.limit === 'number';
 
       let supabaseQuery = this.supabaseService.client
         .from('product_types')
@@ -194,12 +198,13 @@ export class AppService {
   async getProducts(query?: PaginationQuery): Promise<any> {
     try {
       // Check if pagination is needed
-      const needsPagination = query && typeof query.page === 'number' && typeof query.limit === 'number';
+      const needsPagination =
+        query &&
+        typeof query.page === 'number' &&
+        typeof query.limit === 'number';
 
-      let supabaseQuery = this.supabaseService.client
-        .from('products')
-        .select(
-          `
+      let supabaseQuery = this.supabaseService.client.from('products').select(
+        `
           *,
           product_types (
             id,
@@ -207,8 +212,8 @@ export class AppService {
             description
           )
         `,
-          { count: needsPagination ? 'exact' : undefined }
-        );
+        { count: needsPagination ? 'exact' : undefined },
+      );
 
       // Add search filter
       if (query?.search) {
@@ -217,7 +222,10 @@ export class AppService {
 
       // Add product type filter
       if (query?.productTypeId) {
-        supabaseQuery = supabaseQuery.eq('product_type_id', query.productTypeId);
+        supabaseQuery = supabaseQuery.eq(
+          'product_type_id',
+          query.productTypeId,
+        );
       }
 
       if (needsPagination) {
@@ -248,10 +256,10 @@ export class AppService {
             productTypeId: item.product_type_id,
             productType: item.product_types
               ? {
-                id: item.product_types.id,
-                name: item.product_types.name,
-                description: item.product_types.description,
-              }
+                  id: item.product_types.id,
+                  name: item.product_types.name,
+                  description: item.product_types.description,
+                }
               : undefined,
           })),
           pagination: {
@@ -281,10 +289,10 @@ export class AppService {
           productTypeId: item.product_type_id,
           productType: item.product_types
             ? {
-              id: item.product_types.id,
-              name: item.product_types.name,
-              description: item.product_types.description,
-            }
+                id: item.product_types.id,
+                name: item.product_types.name,
+                description: item.product_types.description,
+              }
             : undefined,
         }));
       }
@@ -335,10 +343,10 @@ export class AppService {
         productTypeId: data.product_type_id,
         productType: data.product_types
           ? {
-            id: data.product_types.id,
-            name: data.product_types.name,
-            description: data.product_types.description,
-          }
+              id: data.product_types.id,
+              name: data.product_types.name,
+              description: data.product_types.description,
+            }
           : undefined,
       };
     } catch (error) {
@@ -403,10 +411,10 @@ export class AppService {
         productTypeId: updatedData.product_type_id,
         productType: updatedData.product_types
           ? {
-            id: updatedData.product_types.id,
-            name: updatedData.product_types.name,
-            description: updatedData.product_types.description,
-          }
+              id: updatedData.product_types.id,
+              name: updatedData.product_types.name,
+              description: updatedData.product_types.description,
+            }
           : undefined,
       };
     } catch (error) {
@@ -484,16 +492,16 @@ export class AppService {
         createdAt: item.created_at,
         product: item.products
           ? {
-            id: item.products.id,
-            name: item.products.name,
-            price: parseFloat(item.products.price),
-            productType: item.products.product_types
-              ? {
-                id: item.products.product_types.id,
-                name: item.products.product_types.name,
-              }
-              : undefined,
-          }
+              id: item.products.id,
+              name: item.products.name,
+              price: parseFloat(item.products.price),
+              productType: item.products.product_types
+                ? {
+                    id: item.products.product_types.id,
+                    name: item.products.product_types.name,
+                  }
+                : undefined,
+            }
           : undefined,
       }));
 
@@ -605,16 +613,16 @@ export class AppService {
         createdAt: movementData.created_at,
         product: movementData.products
           ? {
-            id: movementData.products.id,
-            name: movementData.products.name,
-            price: parseFloat(movementData.products.price),
-            productType: movementData.products.product_types
-              ? {
-                id: movementData.products.product_types.id,
-                name: movementData.products.product_types.name,
-              }
-              : undefined,
-          }
+              id: movementData.products.id,
+              name: movementData.products.name,
+              price: parseFloat(movementData.products.price),
+              productType: movementData.products.product_types
+                ? {
+                    id: movementData.products.product_types.id,
+                    name: movementData.products.product_types.name,
+                  }
+                : undefined,
+            }
           : undefined,
       };
     } catch (error) {
@@ -720,16 +728,16 @@ export class AppService {
         createdAt: updatedData.created_at,
         product: updatedData.products
           ? {
-            id: updatedData.products.id,
-            name: updatedData.products.name,
-            price: parseFloat(updatedData.products.price),
-            productType: updatedData.products.product_types
-              ? {
-                id: updatedData.products.product_types.id,
-                name: updatedData.products.product_types.name,
-              }
-              : undefined,
-          }
+              id: updatedData.products.id,
+              name: updatedData.products.name,
+              price: parseFloat(updatedData.products.price),
+              productType: updatedData.products.product_types
+                ? {
+                    id: updatedData.products.product_types.id,
+                    name: updatedData.products.product_types.name,
+                  }
+                : undefined,
+            }
           : undefined,
       };
     } catch (error) {
@@ -973,6 +981,72 @@ export class AppService {
     } catch (error) {
       throw new BadRequestException(
         `Erro ao buscar tendência de estoque: ${error.message}`,
+      );
+    }
+  }
+
+  async getProductTypeDistribution() {
+    try {
+      // Buscar todos os tipos de produto primeiro
+      const { data: productTypes, error: typesError } =
+        await this.supabaseService.client
+          .from('product_types')
+          .select('id, name');
+
+      if (typesError) throw typesError;
+
+      // Buscar todos os produtos com seus tipos
+      const { data: products, error: productsError } =
+        await this.supabaseService.client
+          .from('products')
+          .select('product_type_id');
+
+      if (productsError) throw productsError;
+
+      // Se não há produtos, retorna array vazio
+      if (!products || products.length === 0) {
+        return [];
+      }
+
+      // Criar um mapa de tipos para fácil acesso
+      const typeMap = new Map();
+      productTypes.forEach((type) => {
+        typeMap.set(type.id, type.name);
+      });
+
+      // Contar produtos por tipo
+      const distribution = {};
+      products.forEach((product) => {
+        const typeId = product.product_type_id;
+        if (typeId && typeMap.has(typeId)) {
+          if (!distribution[typeId]) {
+            distribution[typeId] = {
+              id: typeId,
+              name: typeMap.get(typeId),
+              count: 0,
+            };
+          }
+          distribution[typeId].count++;
+        }
+      });
+
+      // Convert to array and calculate percentages
+      const distributionArray = Object.values(distribution).map(
+        (item: any) => ({
+          id: item.id,
+          name: item.name,
+          value: item.count,
+          percentage: Math.round((item.count / products.length) * 100),
+        }),
+      );
+
+      // Sort by count descending
+      distributionArray.sort((a: any, b: any) => b.value - a.value);
+
+      return distributionArray;
+    } catch (error) {
+      throw new BadRequestException(
+        `Erro ao buscar distribuição por tipo: ${error.message}`,
       );
     }
   }

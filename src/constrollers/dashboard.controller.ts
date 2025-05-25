@@ -22,4 +22,10 @@ export class DashboardController {
     console.log('Get stock trend');
     return await this.appService.getStockTrend();
   }
+
+  @Get('product-type-distribution')
+  async getProductTypeDistribution() {
+    console.log('Get product type distribution');
+    return await this.appService.getProductTypeDistribution();
+  }
 }
