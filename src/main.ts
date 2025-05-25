@@ -4,7 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
+  
   // Enable CORS for production
   app.enableCors({
     origin: [

@@ -3,7 +3,7 @@ import { AppService } from 'src/servicecs/app.service';
 
 @Controller('api/dashboard')
 export class DashboardController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get('stats')
   async getDashboardStats() {
