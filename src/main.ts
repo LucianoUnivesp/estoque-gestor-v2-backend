@@ -4,7 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  
+
   // Enable CORS for production
   app.enableCors({
     origin: [
@@ -20,7 +20,7 @@ async function bootstrap() {
   // Set global prefix for API routes
   app.setGlobalPrefix('api');
 
-  const port = process.env.PORT || 3001;
+  const port = 10000;
   await app.listen(port);
 }
 
